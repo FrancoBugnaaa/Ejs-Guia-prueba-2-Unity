@@ -16,18 +16,37 @@ public class InstanciarMax_Text : MonoBehaviour
     {
         
     }
-
+    //intanciar copias prefab hasta que no se pueda mas
     public GameObject cubePrefab;
     public Text maxCant;
+    int cantidad = 0;
+    GameObject clone;
+    public Text lbl;
+    int clonea;
 
-    public void InstantiatorOfClon()
+    public void Clonar()
     {
-
-        GameObject clon;
-
-        for (int i = 0; i < int.Parse(maxCant.text); i++)
+        if (maxCant.text != "")
         {
-            clon = Instantiate(cubePrefab);
+
+            clonea = (int.Parse(maxCant.text));
+
+            if (cantidad < clonea)
+            {
+
+                clone = Instantiate(cubePrefab);
+                cantidad++;
+                lbl.text = (clonea - cantidad).ToString();
+
+            }
+            else
+            {
+                lbl.text = ("Ya ingreso la cantidad maxima");
+            }
+        }
+        else
+        {
+            lbl.text = ("Ingrese una cantidad valida");
         }
     }
 }
