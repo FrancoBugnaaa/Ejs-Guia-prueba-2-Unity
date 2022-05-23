@@ -5,44 +5,41 @@ using UnityEngine.UI;
 
 public class PreFabEj06 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public Text cloneAmoount;
     public GameObject Capsule;
-    public Text maxcant;
+    int amount;
+    GameObject clon;
 
-    public void InstantiateNext()
+    float xOffset = 0;
+    int counter = 0;
+
+    public void LineGenerator()
     {
-
-        if (maxcant.text == "")
+        if(cloneAmoount.text == "")
         {
+            clon = Instantiate(Capsule);
+            clon.transform.position += new Vector3(xOffset, 0, 0);
+            xOffset += 1.1f;
+            counter++;
+        }
+        else
+        {
+            amount = int.Parse(cloneAmoount.text);
+
+            if(amount < 0)
+            {
+                Debug.Log("No se puede crear una linea negativa");
+                return;
+            }
+            if(counter < amount)
+            {
+                clon = Instantiate(Capsule);
+                clon.transform.position += new Vector3(xOffset, 0, 0);
+                xOffset += 1.1f;
+                counter++;
+            }
 
         }
-
-        else if (int.Parse(maxcant.text) > 0)
-        {
-            float distancia;
-            distancia = 2;
-
-            GameObject CapsuleClone;
-            CapsuleClone = Instantiate(Capsule);
-
-            CapsuleClone.transform.position = new Vector3(distancia, 0, 0);
-            Destroy(CapsuleClone, 2);
-
-            distancia += 1.1f;
-        }
-
-
-
+        
     }
 }
